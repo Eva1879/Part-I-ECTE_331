@@ -1,4 +1,7 @@
-Converted Java Code from the MATLAB code:
+
+//Converted Java Code from the MATLAB code:
+//Headers for image importing, IO expection, color image, storing the image under arrays; 
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -7,7 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TemplateMatchingWithoutOpenCV {
+public class TemplateMatching {
     public static void main(String[] args) {
         try {
             BufferedImage templateImage = ImageIO.read(new File("TemplateImage.jpg"));
@@ -27,7 +30,7 @@ public class TemplateMatchingWithoutOpenCV {
         int c1 = sourceImage.getWidth();
         int r2 = templateImage.getHeight();
         int c2 = templateImage.getWidth();
-        int tempSize = r2 * c2;
+        int tempSize = r2 * c2;   //height*width
 
         double minimum = Double.MAX_VALUE;
         double[][] absDiffMat = new double[r1 - r2 + 1][c1 - c2 + 1];
@@ -53,7 +56,7 @@ public class TemplateMatchingWithoutOpenCV {
         double ratio = 10; // for calibration
         double threshold = ratio * minimum;
 
-        List<int[]> coordinates = new ArrayList<>();
+        List<int[]> coordinates = new ArrayList<>();     //Array List to store the row values, thus in order to access the result image
         for (int i = 0; i < absDiffMat.length; i++) {
             for (int j = 0; j < absDiffMat[0].length; j++) {
                 if (absDiffMat[i][j] <= threshold) {
